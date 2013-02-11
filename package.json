@@ -1,0 +1,33 @@
+{
+	"name": "crust",
+	"preferGlobal": true,
+	"version": "0.0.2",
+	"description": "A small client to test REST services.",
+	"bin": "./crust.js",
+	"dependencies": {
+		"optimist": "0.3.5"
+	},
+	"repository": {
+		"type": "git",
+        	"url": "http://github.com/flowlo/node-crust.git"
+	},
+	"author": {
+		"name": "Lorenz Leutgeb",
+		"email": "lorenz.leutgeb@gmail.com"
+	},
+	"engine": {
+		"node": ">=0.4"
+	},
+	"files": [
+		"crust.js"
+	],
+	"keywords": [
+		"rest",
+		"client",
+		"testing",
+		"development",
+		"tool",
+		"http",
+		"method"
+	]
+}
