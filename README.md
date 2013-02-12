@@ -2,15 +2,17 @@
 
 A command line REST client written in node.js
 
+`crust` is not a library for node to query REST services like [restler](https://github.com/danwrong/restler) or a REST framework to provide such a service, like [restify](https://github.com/mcavage/node-restify).
+
 ## Installation
 
-With [npm](http://github.com/isaacs/npm), just do:
+With [npm](https://github.com/isaacs/npm), just do:
 
     npm install -g crust
 
 or clone this project:
 
-    git clone http://github.com/flowlo/node-crust.git
+    git clone https://github.com/flowlo/node-crust.git
 
 ## Usage
 
