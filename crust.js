@@ -6,32 +6,21 @@ var argv = require('optimist')
 	.argv
 ;
 
-var options = {};
+var options = {}, match = [], data = '', filter = /^(((.*?):(.*?))@)?([^:\/\s]+)?(:(\d+))?(\/(.*))?/;
 
-if (argv._.length > 0) {
-	if (argv._.length > 1)
-		options.method = argv._[0].toUpperCase();
+if (argv._.length > 0)
+	match = (argv._[1] || argv._[0]).match(filter);
+if (argv._.length > 1)
+	options.method = argv._[0].toUpperCase();
 
-	var match = argv._[argv._.length == 2 ? 1 : 0].match(/^(((.*?):(.*?))@)?([^:\/\s]+)?(:(\d+))?(\/(.*))?/);
+options.hostname = match[5] || 'localhost';
+options.path = match[8] || '/';
+options.port = match[7] || 80;
 
-	if (!match) {
-		console.log('Invalid URL!');
-		process.exit(1);
-	}
+if (match[2])
+	options.auth = match[2];
 
-	options.hostname = match[5] ? match[5] : 'localhost';
-	if (match[2])
-		options.auth = match[2];
-	if (match[8])
-		options.path = match[8];
-	if (match[7])
-		options.port = match[7];
-}
-else {
-	options.hostname = 'localhost';
-}
-
-var data = '';
+console.log(options);
 
 var req = http.request(options, function(res) {
 	res.setEncoding('utf8');
@@ -43,9 +32,7 @@ var req = http.request(options, function(res) {
 	});
 });
 
-req.on('error', function(e) {
-	console.log('Error: ' + e.message);
-});
+req.on('error', console.error);
 
 if (options.method == 'POST')
 	process.stdin.pipe(req);
