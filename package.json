@@ -1,7 +1,7 @@
 {
 	"name": "crust",
 	"preferGlobal": true,
-	"version": "0.0.3",
+	"version": "0.0.4",
 	"description": "A small client to test REST services.",
 	"bin": "crust.js",
 	"dependencies": {
