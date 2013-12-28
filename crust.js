@@ -1,28 +1,20 @@
 #!/usr/bin/env node
 
 var http = require('http');
-var argv = require('optimist')
-	.usage('Usage: $0 [method] [url]')
-	.argv
-;
+var argv = require('optimist').usage('Usage: $0 [method] [url]').argv;
+var match = argv._.length > 0 ? (argv._[1] || argv._[0]).match(/(((.*?):(.*?))@)?([^:\/\s]+)?(:(\d+))?(\/(.*))?/) : [];
 
-var options = {}, match = [], data = '', filter = /^(((.*?):(.*?))@)?([^:\/\s]+)?(:(\d+))?(\/(.*))?/;
-
-if (argv._.length > 0)
-	match = (argv._[1] || argv._[0]).match(filter);
-if (argv._.length > 1)
-	options.method = argv._[0].toUpperCase();
-
-options.hostname = match[5] || 'localhost';
-options.path = match[8] || '/';
-options.port = match[7] || 80;
-
-if (match[2])
-	options.auth = match[2];
+var options = {
+	hostname: match[5] || 'localhost',
+	path: match[8] || '/',
+	port: match[7] || 80,
+	auth: match[2],
+	method: argv._.length > 1 ? argv._[0].toUpperCase() : 'GET'
+};
 
 console.log(options);
 
-var req = http.request(options, function(res) {
+var data = '', req = http.request(options, function(res) {
 	res.setEncoding('utf8');
 	res.on('data', function(chunk) {
 		data += chunk;
@@ -34,7 +26,4 @@ var req = http.request(options, function(res) {
 
 req.on('error', console.error);
 
-if (options.method == 'POST')
-	process.stdin.pipe(req);
-else
-	req.end();
+options.method == 'POST' ? process.stdin.pipe(req) : req.end();
