@@ -12,15 +12,18 @@ var options = {
 	method: argv._.length > 1 ? argv._[0].toUpperCase() : 'GET'
 };
 
-console.log(options);
-
 var data = '', req = http.request(options, function(res) {
 	res.setEncoding('utf8');
 	res.on('data', function(chunk) {
 		data += chunk;
 	});
 	res.on('end', function() {
-		console.log(JSON.stringify({'options': options, 'response': {'statusCode': res.statusCode, 'headers': res.headers, 'data': JSON.parse(data)}}, null, 3));
+		try {
+			console.log(JSON.stringify({'response': {'statusCode': res.statusCode, 'headers': res.headers, 'data': JSON.parse(data)}}, null, 3));
+		}
+		catch (e) {
+			console.log(JSON.stringify({'response': {'statusCode': res.statusCode, 'headers': res.headers, 'data': data}}, null, 3));
+		}
 	});
 });
 
