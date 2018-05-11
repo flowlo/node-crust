@@ -12,6 +12,7 @@
         	"url": "http://github.com/lorenzleutgeb/node-crust.git"
 	},
 	"author": "Lorenz Leutgeb <lorenz@leutgeb.xyz>",
+	"license": "MIT",
 	"engine": {
 		"node": ">=0.4"
 	},
