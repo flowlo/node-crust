@@ -1,7 +1,7 @@
 {
 	"name": "crust",
 	"preferGlobal": true,
-	"version": "0.0.5",
+	"version": "0.0.6",
 	"description": "A small client to test REST services.",
 	"bin": "crust.js",
 	"dependencies": {
@@ -9,9 +9,9 @@
 	},
 	"repository": {
 		"type": "git",
-        	"url": "http://github.com/flowlo/node-crust.git"
+        	"url": "http://github.com/lorenzleutgeb/node-crust.git"
 	},
-	"author": "Lorenz Leutgeb <lorenz.leutgeb@gmail.com>",
+	"author": "Lorenz Leutgeb <lorenz@leutgeb.xyz>",
 	"engine": {
 		"node": ">=0.4"
 	},
